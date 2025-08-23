@@ -1,0 +1,6 @@
+name: MessageEngine
+version: '1.0'
+main: org.mellurboo.messageEngine.MessageEngine
+api-version: '1.21'
+load: STARTUP
+authors: [ Mellurboo ]
