@@ -16,8 +16,9 @@ public class commandCompleter implements TabCompleter {
         completions.add("StopIntervalMessages");
         completions.add("StartIntervalMessages");
         completions.add("RestartIntervalMessages");
+        completions.add("SeeIntervalMessages");
 
-        if (commandSender.hasPermission("messageEngine.reload")) {
+        if (commandSender.hasPermission("messageEngine.reload") || commandSender.isOp()) {
             completions.add("reload");
         }
 

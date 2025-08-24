@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.mellurboo.messageEngine.MessageEngine;
 
@@ -20,13 +21,16 @@ public class commandController implements CommandExecutor {
                 commandSender.sendMessage(ChatColor.GREEN + "Reloaded config, you may need to restart the interval messages");
                 break;
             case "StopIntervalMessages":
-                if (commandSender.hasPermission("messageEngine.scheduler.stopIntervalMessages")) {plugin.intervalBasedMessages.stopIntervalBasedMessages();}
+                if (commandSender.hasPermission("messageEngine.scheduler.stopIntervalMessages")) {plugin.intervalBasedMessages.stopIntervalBasedMessages((Player) commandSender);}
                 break;
             case "StartIntervalMessages":
-                if (commandSender.hasPermission("messageEngine.scheduler.startIntervalMessages")) {plugin.intervalBasedMessages.mapIntervalBasedMessages();}
+                if (commandSender.hasPermission("messageEngine.scheduler.startIntervalMessages")) {plugin.intervalBasedMessages.mapIntervalBasedMessages((Player) commandSender);}
                 break;
             case "RestartIntervalMessages":
-                if (commandSender.hasPermission("messageEngine.scheduler.restartIntervalMessages")) {plugin.intervalBasedMessages.restartIntervalBasedMessages();}
+                if (commandSender.hasPermission("messageEngine.scheduler.restartIntervalMessages")) {plugin.intervalBasedMessages.restartIntervalBasedMessages((Player) commandSender);}
+                break;
+            case "SeeIntervalMessages":
+                if (commandSender.hasPermission("seeIntervalMessages")) {plugin.intervalBasedMessages.seeIntervalBasedMessages((Player) commandSender);}
                 break;
             default:
                 commandSender.sendMessage(ChatColor.RED + "[MessageEngine] Unknown command: " + commandSent);

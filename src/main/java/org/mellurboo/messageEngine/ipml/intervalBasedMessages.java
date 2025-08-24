@@ -1,11 +1,13 @@
 package org.mellurboo.messageEngine.ipml;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.mellurboo.messageEngine.MessageEngine;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +16,11 @@ public class intervalBasedMessages {
     public final MessageEngine plugin;
     public intervalBasedMessages(MessageEngine plugin) { this.plugin = plugin; }
     public List<BukkitTask> scheduledIntervalTasks = new ArrayList<>();
+    private List<Map<?, ?>> messages;
 
     /// maps the interval based messages and starts them as a task timer
-    public void mapIntervalBasedMessages(){
-        List<Map<?, ?>> messages = plugin.getConfig().getMapList("messages");
+    public void mapIntervalBasedMessages(@Nullable Player sender){
+        messages = plugin.getConfig().getMapList("messages");
 
         for (Map<?, ?> mdata : messages) {
             String message = (String) mdata.get("text");
@@ -37,19 +40,32 @@ public class intervalBasedMessages {
 
             Bukkit.getLogger().info("Scheduled '" + message + "' to be sent to players every " + interval + " Seconds");
         }
+        if (sender != null) sender.sendMessage(ChatColor.GREEN + "Started " + scheduledIntervalTasks.size() + " tasks");
     }
 
-    public void stopIntervalBasedMessages(){
+    public void stopIntervalBasedMessages(Player sender){
         for (BukkitTask task : scheduledIntervalTasks){
             task.cancel();
         }
 
         Bukkit.getLogger().info("Stopped " + scheduledIntervalTasks.size() + " tasks");
+        if (sender != null) sender.sendMessage(ChatColor.GREEN + "Stopped " + scheduledIntervalTasks.size() + " tasks");
         scheduledIntervalTasks.clear();
     }
 
-    public void restartIntervalBasedMessages(){
-        stopIntervalBasedMessages();
-        mapIntervalBasedMessages();
+    public void restartIntervalBasedMessages(Player sender){
+        plugin.reloadConfig();
+        messages.clear();
+        stopIntervalBasedMessages(sender);
+        if (sender != null) sender.sendMessage(ChatColor.GREEN + "Now restarting tasks!\n");
+        mapIntervalBasedMessages(sender);
+    }
+
+    public void seeIntervalBasedMessages(Player sender){
+        sender.sendMessage(ChatColor.BLUE + "> Interval Based Messages ====");
+        for (Map<?, ?> mdata : messages){
+            sender.sendMessage((String)mdata.get("text") + " Broadcasts every " + mdata.get("interval") + " Seconds\n");
+        }
+        sender.sendMessage(ChatColor.BLUE + "> =====================");
     }
 }

@@ -14,7 +14,7 @@ public final class MessageEngine extends JavaPlugin {
     @Override
     public void onEnable() {
         loadFileConfiguration();
-        intervalBasedMessages.mapIntervalBasedMessages();
+        intervalBasedMessages.mapIntervalBasedMessages(null);
 
         getCommand("me").setExecutor(new commandController(this));
         getCommand("me").setTabCompleter(new commandCompleter());
