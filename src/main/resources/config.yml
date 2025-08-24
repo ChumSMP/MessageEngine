@@ -2,6 +2,10 @@
 # Interval is in Seconds not Ticks*
 #
 
+# To stop the plugin from spamming you can set how many chat messages have to be sent before it can
+# broadcast, if this minimum isn't reached then it will skip that broadcast opportunity.
+minimumChatMessagesForBroadcast: 15
+
 messages:
   - text: "§eHey! this server and a lot of its plugins are made by me solo, if you would like to help cover some overhead costs, i would love it if you visited our Ko-Fi page, §b§nhttps://ko-fi.com/mellurboo"
     interval: 600

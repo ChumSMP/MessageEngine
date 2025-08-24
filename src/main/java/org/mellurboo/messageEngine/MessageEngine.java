@@ -5,16 +5,20 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mellurboo.messageEngine.commands.commandController;
 import org.mellurboo.messageEngine.commands.completer.commandCompleter;
+import org.mellurboo.messageEngine.events.chatMessage;
 import org.mellurboo.messageEngine.ipml.intervalBasedMessages;
 
 public final class MessageEngine extends JavaPlugin {
     public intervalBasedMessages intervalBasedMessages = new intervalBasedMessages(this);
+    public chatMessage chatMessage = new chatMessage(this);
     public FileConfiguration config;
 
     @Override
     public void onEnable() {
         loadFileConfiguration();
         intervalBasedMessages.mapIntervalBasedMessages(null);
+
+        this.getServer().getPluginManager().registerEvents(chatMessage, this);
 
         getCommand("me").setExecutor(new commandController(this));
         getCommand("me").setTabCompleter(new commandCompleter());

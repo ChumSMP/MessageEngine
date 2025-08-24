@@ -33,9 +33,15 @@ public class intervalBasedMessages {
             BukkitTask task = new BukkitRunnable(){
                 @Override
                 public void run(){
+                    if (plugin.chatMessage.messagesSinceLastBroadcast < plugin.chatMessage.getMinimumChatMessagesToBroadcast()){
+                        return; // did not meet the anti-spam chat requirements so we will skip this broadcast opportunity
+                    }
+
                     for (Player p : Bukkit.getOnlinePlayers()){
                         p.sendMessage(message);
                     }
+
+                    plugin.chatMessage.resetMessagesSinceLastBroadcast();
                 }
             }.runTaskTimer(plugin, interval * 20L, interval * 20L); // it's not random it accounts for tickrate
 
