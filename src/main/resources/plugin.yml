@@ -4,3 +4,11 @@ main: org.mellurboo.messageEngine.MessageEngine
 api-version: '1.21'
 load: STARTUP
 authors: [ Mellurboo ]
+commands:
+  messageEngine:
+    description: message engine plugin controller
+  me:
+    description: message engine plugin controller
+permissions:
+  messageEngine.reload:
+    default: false
