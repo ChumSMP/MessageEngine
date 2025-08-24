@@ -3,5 +3,5 @@
 #
 
 messages:
-  - text: "§eHey! this server and a lot of its plugins are made by me solo, if you would like to help cover some overhead costs, i would love it if you visited our Ko-Fi page, https://ko-fi.com/mellurboo"
-    interval: 900
+  - text: "§eHey! this server and a lot of its plugins are made by me solo, if you would like to help cover some overhead costs, i would love it if you visited our Ko-Fi page, §b§nhttps://ko-fi.com/mellurboo"
+    interval: 600

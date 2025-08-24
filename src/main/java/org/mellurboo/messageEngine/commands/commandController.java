@@ -14,6 +14,8 @@ public class commandController implements CommandExecutor {
     public commandController(MessageEngine plugin) { this.plugin = plugin; }
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
+        if (strings.length < 1) { commandSender.sendMessage(ChatColor.RED + "[MessageEngine] Command sent with bad no arguments."); return true; }
+
         final String commandSent = strings[0];
         switch (commandSent){
             case "reload":

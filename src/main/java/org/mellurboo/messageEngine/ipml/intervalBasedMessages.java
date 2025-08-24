@@ -20,6 +20,9 @@ public class intervalBasedMessages {
 
     /// maps the interval based messages and starts them as a task timer
     public void mapIntervalBasedMessages(@Nullable Player sender){
+        if (messages != null) messages.clear();
+        stopIntervalBasedMessages(null);
+
         messages = plugin.getConfig().getMapList("messages");
 
         for (Map<?, ?> mdata : messages) {
@@ -64,8 +67,8 @@ public class intervalBasedMessages {
     public void seeIntervalBasedMessages(Player sender){
         sender.sendMessage(ChatColor.BLUE + "> Interval Based Messages ====");
         for (Map<?, ?> mdata : messages){
-            sender.sendMessage((String)mdata.get("text") + " Broadcasts every " + mdata.get("interval") + " Seconds\n");
+            sender.sendMessage(ChatColor.RESET + (String)mdata.get("text") + ChatColor.GRAY + "\nBroadcasts every " + mdata.get("interval") + " Seconds\n");
         }
-        sender.sendMessage(ChatColor.BLUE + "> =====================");
+        sender.sendMessage(ChatColor.BLUE + "> ============================");
     }
 }
