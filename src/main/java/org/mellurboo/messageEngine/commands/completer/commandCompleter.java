@@ -18,6 +18,11 @@ public class commandCompleter implements TabCompleter {
         completions.add("RestartIntervalMessages");
         completions.add("SeeIntervalMessages");
 
+        if (commandSender.hasPermission("messageEngine.moderation.reviewer") || commandSender.isOp()){
+            completions.add("review");
+            completions.add("done");
+        }
+
         if (commandSender.hasPermission("messageEngine.reload") || commandSender.isOp()) {
             completions.add("reload");
         }

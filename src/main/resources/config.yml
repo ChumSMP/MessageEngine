@@ -9,3 +9,23 @@ minimumChatMessagesForBroadcast: 15
 messages:
   - text: "§eHey! this server and a lot of its plugins are made by me solo, if you would like to help cover some overhead costs, i would love it if you visited our Ko-Fi page, §b§nhttps://ko-fi.com/mellurboo"
     interval: 600
+
+#
+# Moderation
+#
+
+# Tell the player a message was flagged
+PlayerFlaggedMessage: "§dthe message you just attempted to send has been flagged for review as it contains a blacklisted word, you will remain muted until the message has been reviewed."
+
+blacklisted:
+  - "(n[i1!]+g+[a@e3]+r?)"
+  - "(c[h]+[i1!]+nk?)"
+  - "(s[p]+[i1!]+c)"
+  - "(k[i1!]+k[e3]+)"
+  - "(f[a@]+g+)"
+  - "(d[i1!]+k[e3]+)"
+  - "(q[u]+e[e3]+r)"
+  - "(j[e3]+w)"
+  - "(s[l1!]+u+t)"
+  - "(w[h]+o+r[e3]+)"
+  - "(r[e3]+t[a@]+r+d+)"

@@ -12,3 +12,12 @@ commands:
 permissions:
   messageEngine.reload:
     default: false
+  messageEngine.scheduler.stopIntervalMessages:
+    default: false
+  messageEngine.scheduler.startIntervalMessages:
+    default: false
+  messageEngine.scheduler.restartIntervalMessages:
+    default: false
+  messageEngine.moderation.reviewer:
+    default: false
+

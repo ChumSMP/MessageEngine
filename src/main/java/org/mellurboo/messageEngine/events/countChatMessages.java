@@ -5,10 +5,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.mellurboo.messageEngine.MessageEngine;
 
-public class chatMessage implements Listener {
+public class countChatMessages implements Listener {
     public final MessageEngine plugin;
-    public chatMessage(MessageEngine plugin) { this.plugin = plugin; }
-    public int messagesSinceLastBroadcast = 0;
+    public countChatMessages(MessageEngine plugin) { this.plugin = plugin; }
+
+    private int messagesSinceLastBroadcast = 0;
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {

@@ -34,6 +34,12 @@ public class commandController implements CommandExecutor {
             case "SeeIntervalMessages":
                 if (commandSender.hasPermission("seeIntervalMessages")) {plugin.intervalBasedMessages.seeIntervalBasedMessages((Player) commandSender);}
                 break;
+            case "review":
+                if (commandSender.hasPermission("messageEngine.moderation.reviewer")) { plugin.flaggedMessages.showCurrentCase((Player) commandSender); }
+                break;
+            case "done":
+                if (commandSender.hasPermission("messageEngine.moderation.reviewer")) { plugin.flaggedMessages.removeLatestCase((Player) commandSender); }
+                break;
             default:
                 commandSender.sendMessage(ChatColor.RED + "[MessageEngine] Unknown command: " + commandSent);
                 break;

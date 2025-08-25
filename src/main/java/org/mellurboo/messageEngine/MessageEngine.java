@@ -5,12 +5,18 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mellurboo.messageEngine.commands.commandController;
 import org.mellurboo.messageEngine.commands.completer.commandCompleter;
-import org.mellurboo.messageEngine.events.chatMessage;
+import org.mellurboo.messageEngine.events.blockOffensiveMessages;
+import org.mellurboo.messageEngine.events.countChatMessages;
+import org.mellurboo.messageEngine.events.offenderMessageHold;
 import org.mellurboo.messageEngine.ipml.intervalBasedMessages;
+import org.mellurboo.messageEngine.moderation.flaggedMessages;
 
 public final class MessageEngine extends JavaPlugin {
     public intervalBasedMessages intervalBasedMessages = new intervalBasedMessages(this);
-    public chatMessage chatMessage = new chatMessage(this);
+    public countChatMessages countChatMessages = new countChatMessages(this);
+    public flaggedMessages flaggedMessages = new flaggedMessages(this);
+    public blockOffensiveMessages blockOffensiveMessages = new blockOffensiveMessages(this);
+    public offenderMessageHold offenderMessageHold = new offenderMessageHold(this);
     public FileConfiguration config;
 
     @Override
@@ -18,10 +24,14 @@ public final class MessageEngine extends JavaPlugin {
         loadFileConfiguration();
         intervalBasedMessages.mapIntervalBasedMessages(null);
 
-        this.getServer().getPluginManager().registerEvents(chatMessage, this);
+        this.getServer().getPluginManager().registerEvents(countChatMessages, this);
+        this.getServer().getPluginManager().registerEvents(blockOffensiveMessages, this);
+        this.getServer().getPluginManager().registerEvents(offenderMessageHold, this);
 
         getCommand("me").setExecutor(new commandController(this));
         getCommand("me").setTabCompleter(new commandCompleter());
+
+        blockOffensiveMessages.loadBlacklistedWords();
 
         Bukkit.getLogger().info("[MessageEngine] Plugin Enabled]");
     }
@@ -36,5 +46,7 @@ public final class MessageEngine extends JavaPlugin {
     public void loadFileConfiguration() {
         saveDefaultConfig();
         config = getConfig();
+
+        blockOffensiveMessages.loadBlacklistedWords();
     }
 }
