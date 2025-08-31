@@ -1,7 +1,6 @@
 package org.mellurboo.messageEngine.events;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,7 +32,6 @@ public class blockOffensiveMessages implements Listener {
                 chatter.sendMessage(plugin.getConfig().getString("PlayerFlaggedMessage"));
                 plugin.flaggedMessages.addBlockedMessage(chatter, message);
                 plugin.offenderMessageHold.addToOffenderList(chatter);
-                notifyAdminsOfNewCase(chatter);
                 return;
             }
         }
@@ -52,14 +50,6 @@ public class blockOffensiveMessages implements Listener {
 
         if (blacklistedWords.isEmpty()) {
             blacklistedWords = List.of();
-        }
-    }
-
-    public void notifyAdminsOfNewCase(Player offender){
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.hasPermission("messageEngine.moderation.reviewer")){
-                player.sendMessage(ChatColor.RED + "A new message has been flagged for review by: " + ChatColor.BOLD  + "" + offender.getName());
-            }
         }
     }
 }
