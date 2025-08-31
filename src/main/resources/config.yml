@@ -16,6 +16,7 @@ messages:
 
 # Tell the player a message was flagged
 PlayerFlaggedMessage: "§dthe message you just attempted to send has been flagged for review as it contains a blacklisted word, you will remain muted until the message has been reviewed."
+
 blacklisted:
   - "(n[i1!]+g+[a@e3]+r?)"
   - "(c[h]+[i1!]+nk?)"
