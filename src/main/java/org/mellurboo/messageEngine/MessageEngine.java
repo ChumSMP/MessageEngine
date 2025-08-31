@@ -8,6 +8,7 @@ import org.mellurboo.messageEngine.commands.completer.commandCompleter;
 import org.mellurboo.messageEngine.events.blockOffensiveMessages;
 import org.mellurboo.messageEngine.events.countChatMessages;
 import org.mellurboo.messageEngine.events.offenderMessageHold;
+import org.mellurboo.messageEngine.events.onPlayerPlace;
 import org.mellurboo.messageEngine.ipml.intervalBasedMessages;
 import org.mellurboo.messageEngine.moderation.flaggedMessages;
 
@@ -17,6 +18,7 @@ public final class MessageEngine extends JavaPlugin {
     public flaggedMessages flaggedMessages = new flaggedMessages(this);
     public blockOffensiveMessages blockOffensiveMessages = new blockOffensiveMessages(this);
     public offenderMessageHold offenderMessageHold = new offenderMessageHold(this);
+    public onPlayerPlace onPlayerPlace = new onPlayerPlace();
     public FileConfiguration config;
 
     @Override
@@ -27,6 +29,7 @@ public final class MessageEngine extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(countChatMessages, this);
         this.getServer().getPluginManager().registerEvents(blockOffensiveMessages, this);
         this.getServer().getPluginManager().registerEvents(offenderMessageHold, this);
+        this.getServer().getPluginManager().registerEvents(onPlayerPlace, this);
 
         getCommand("me").setExecutor(new commandController(this));
         getCommand("me").setTabCompleter(new commandCompleter());
